@@ -1,0 +1,23 @@
+name: Live Stream Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install FFmpeg
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+
+    - name: Run FFmpeg Command
+      run: |
+        ffmpeg -loop 1 -i "https://1.bp.blogspot.com/-uzk1MQbZMx8/YD6istnqgHI/AAAAAAAA4qY/JsypwzctPtE5kY1S5Ob418NgX9e2rNZ4QCLcBGAsYHQ/s0/Flag_of_Palestine.gif" -i "https://server12.mp3quran.net/maher/018.mp3" -c:v libx264 -preset medium -b:v 2000k -maxrate 2500k -bufsize 5000k -c:a aac -b:a 128k -f flv "rtmps://live-api-s.facebook.com:443/rtmp/FB-709545717887305-0-Abw4vYMphBvg1Adi"
