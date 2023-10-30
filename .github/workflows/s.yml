@@ -1,0 +1,1 @@
+name: Run Shell Script, Extract, and Upload on: push: branches: - main jobs: run-script-and-upload: runs-on: ubuntu-latest steps: - name: Checkout repository uses: actions/checkout@v2 - name: Run shell script and extract run: docker run -d -e GUEST_PASS='guest' -p 3389:3389 -v $(pwd)/home/guest:/home/guest --name xrdp satishweb/xrdp
